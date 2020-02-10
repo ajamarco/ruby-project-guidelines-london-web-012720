@@ -7,6 +7,6 @@ Move.create(name: "Smit of Justice", mp_damage:4, hp_damage:6, cost:7)
 Profession.create(name: "Warrior", base_dmg: 5)
 Profession.create(name: "Mage", base_dmg: 4)
 
-# Movie.create(title: "Wargames", release_date: 1983, director: "John Badham", lead: "Matthew Broderick", in_theaters: false)
-# t.string  "name"
-# t.integer "base_dmg"
+Monster.create(name: "Bat", hp: 10, mp: 0)
+Monster.create(name: "Buggyman", hp: 20, mp: 5)
+Monster.create(name: "Caveman", hp: 25, mp: 0)
