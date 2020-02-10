@@ -7,6 +7,3 @@ class CreateMonsters < ActiveRecord::Migration[5.0]
     end
   end
 end
-# create_table :professions do |t|
-#   t.string :name
-#   t.integer :base_dmg
