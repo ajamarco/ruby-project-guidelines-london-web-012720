@@ -14,9 +14,9 @@ ActiveRecord::Schema.define(version: 20200210190641) do
 
   create_table "char_moves", force: :cascade do |t|
     t.integer "move_id"
-    t.string  "imageable_type"
-    t.integer "imageable_id"
-    t.index ["imageable_type", "imageable_id"], name: "index_char_moves_on_imageable_type_and_imageable_id"
+    t.string  "moveable_type"
+    t.integer "moveable_id"
+    t.index ["moveable_type", "moveable_id"], name: "index_char_moves_on_moveable_type_and_moveable_id"
   end
 
   create_table "heros", force: :cascade do |t|

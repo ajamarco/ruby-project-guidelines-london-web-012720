@@ -2,7 +2,7 @@ class CreateCharMoves < ActiveRecord::Migration[5.0]
   def change
     create_table :char_moves do |t|
       t.integer :move_id
-      t.references :imageable, polymorphic: true
+      t.references :moveable, polymorphic: true
     end
   end
 end

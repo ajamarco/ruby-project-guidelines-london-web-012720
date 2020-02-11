@@ -1,4 +1,4 @@
 class Hero < ActiveRecord::Base
     belongs_to :profession
-    has_many :char_moves, as: :imageable 
+    has_many :char_moves, as: :moveable 
 end
