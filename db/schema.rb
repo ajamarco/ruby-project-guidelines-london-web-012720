@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200211133645) do
+ActiveRecord::Schema.define(version: 20200211134643) do
 
   create_table "char_moves", force: :cascade do |t|
     t.integer "move_id"
     t.string  "moveable_type"
     t.integer "moveable_id"
     t.index ["moveable_type", "moveable_id"], name: "index_char_moves_on_moveable_type_and_moveable_id"
+  end
+
+  create_table "hero_items", force: :cascade do |t|
+    t.integer "hero_id"
+    t.integer "item_id"
   end
 
   create_table "heros", force: :cascade do |t|
