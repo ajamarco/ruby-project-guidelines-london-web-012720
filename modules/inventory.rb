@@ -37,11 +37,27 @@ module Inventory
         if res == "Yes"
             type = hero_item.item.attr_to_change
             if type == "hp"
+                if hero_item.hero.hp < 96
                 hero_item.hero.hp + 5
                 puts "hp recovered +5"
+                elsif hero_item.hero.hp < 100
+                    hero_item.hero.hp = 100
+                    puts "hp has reached maximum"
+                else
+                    puts "hp is already max"
+                    return
+                end
             else
+                if hero_item.hero.mp < 96
                 hero_item.hero.mp + 5
                 puts "mp recovered +5"
+                elsif hero_item.hero.mp < 100
+                    hero_item.hero.mp = 100
+                    puts "mp has reached maximum"
+                else
+                    puts "mp is already max"
+                    return
+                end
             end
             HeroItem.delete(hero_item.id)
         else
