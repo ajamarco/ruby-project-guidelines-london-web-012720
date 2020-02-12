@@ -65,6 +65,12 @@ GEM
       tty-screen (~> 0.7)
       wisper (~> 2.0.0)
     tty-screen (0.7.1)
+    tty-table (0.11.0)
+      equatable (~> 0.6)
+      necromancer (~> 0.5)
+      pastel (~> 0.7.2)
+      strings (~> 0.1.5)
+      tty-screen (~> 0.7)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.1)
@@ -82,6 +88,7 @@ DEPENDENCIES
   sqlite3
   tty-box
   tty-prompt
+  tty-table
 
 BUNDLED WITH
    2.1.4

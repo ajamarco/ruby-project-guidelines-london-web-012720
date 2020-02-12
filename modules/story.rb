@@ -49,7 +49,7 @@ module Story
             when arr_to_selection[2]
                 if !has_key
                     Printing.printing("You found a key to the kitchen!")
-                    Item.create(name: "key", attr_to_change: "", amount: 1)
+                    Item.create(name: "key", attr_to_change: "")
                 else
                     Printing.printing("There's nothing more for you here!")
                 end

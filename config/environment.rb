@@ -7,6 +7,6 @@ Bundler.require
 require_all 'app'
 require_all 'modules'
 
-ActiveRecord::Base.logger.level = 1 
+ActiveRecord::Base.logger = nil
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'db/development.db')
 
