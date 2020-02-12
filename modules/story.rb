@@ -28,6 +28,41 @@ module Story
     end 
 
     def self.scene02
-        Printing.printing("going to scene 2")
+        puts "\n\n"
+        Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
+        control = 0
+        while control == 0 do
+            has_key = Item.find_by(name: "key")
+            arr_to_selection = ["Sit in the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
+            option = Selection.selection(arr_to_selection)
+
+            case option
+            when arr_to_selection[0]
+            when arr_to_selection[1]
+                if has_key
+                    Printing.printing("You could open the door and storm into the kitchen")
+                    control = 1
+                    scene03
+                else
+                    Printing.printing("The door is locked ")
+                end
+            when arr_to_selection[2]
+                if !has_key
+                    Printing.printing("You found a key to the kitchen!")
+                    Item.create(name: "key", attr_to_change: "", amount: 1)
+                else
+                    Printing.printing("There's nothing more for you here!")
+                end
+                
+            when arr_to_selection[3]
+                Inventory.open_inventory
+            end
+
+        end
+        
+    end
+
+    def self.scene03
+        Printing.printing("\n\n\n\n scene 03")
     end
 end
