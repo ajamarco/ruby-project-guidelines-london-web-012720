@@ -56,7 +56,7 @@ module NewGame
             
                                                                                 Choose a class:", c)
         if classification == "Warrior"
-            puts "Offensive character with high base health"
+            puts "Offensive character with high base health + damage"
             ans = @prompt.select("Choose Warrior?", ["yes", "no"])
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 

@@ -56,6 +56,8 @@ module Story
                 
             when arr_to_selection[3]
                 Inventory.open_inventory
+                item = Inventory.select_item
+                item = Inventory.use_item?(item)
             end
 
         end

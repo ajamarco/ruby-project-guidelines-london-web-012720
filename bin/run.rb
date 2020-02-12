@@ -13,4 +13,3 @@ char = NewGame.pick_class(name)
 
 Story.scene01(name)
 
-Inventory.select_item

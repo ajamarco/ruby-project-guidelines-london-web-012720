@@ -4,10 +4,10 @@ module Inventory
 
     def self.open_inventory
         Printing.printing("Inventory", 0.0001)
-        table = TTY::Table.new [['Item','Amount', 'Owner']]
+        table = TTY::Table.new [['Item', 'Owner']]
         items = HeroItem.all
         items.map{|i|
-        [i.item.name, i.item.amount, i.hero.name]
+        [i.item.name, i.hero.name]
         }.each{|i| table << i}
         puts table.render(:ascii)
      end
@@ -18,6 +18,7 @@ module Inventory
         "#{i.item.name} - #{i.hero.name}"
         }
         item = @prompt.select('Pick an item:', items)
+        item
     end
 
     def self.use_item?(item)
