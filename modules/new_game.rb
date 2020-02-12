@@ -4,6 +4,8 @@ module NewGame
     
 
     def self.welcome()
+        Hero.destroy_all
+        HeroItem.destroy_all
         system 'clear'
         puts "
 
@@ -56,10 +58,13 @@ module NewGame
             
                                                                                 Choose a class:", c)
         if classification == "Warrior"
-            puts "Offensive character with high base health + damage"
+            puts "Offensive character with high base health"
             ans = @prompt.select("Choose Warrior?", ["yes", "no"])
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
+                hero2 = Hero.create(name: "Alex", hp: 70, mp: 100, profession_id: 2) 
+                HeroItem.create(hero_id: hero.id, item_id: 1)
+                HeroItem.create(hero_id: hero2.id, item_id: 2)
              else
                 self.pick_class(n)
              end
@@ -68,6 +73,9 @@ module NewGame
             ans = @prompt.select("Choose Mage?", ["yes", "no"])
             if ans == "yes"
             hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)
+            hero2 = Hero.create(name: "Ben", hp: 100, mp: 70, profession_id: 1) 
+            HeroItem.create(hero_id: hero.id, item_id: 2)
+            HeroItem.create(hero_id: hero2.id, item_id: 1)
             else
                 self.pick_class(n)
             end
