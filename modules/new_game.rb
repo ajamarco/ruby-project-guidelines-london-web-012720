@@ -6,6 +6,9 @@ module NewGame
     def self.welcome()
         Hero.destroy_all
         HeroItem.destroy_all
+        Item.destroy_all
+        Item.create(name: "Potion", attr_to_change: "hp", description: "A magical potion that recovers 5hp")
+        Item.create(name: "MP recovery", attr_to_change: "mp", description: "A magical potion that recovers 5mp")
         system 'clear'
         puts "
 

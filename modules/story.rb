@@ -34,6 +34,7 @@ module Story
         sitted_on_couch = false
         while control == 0 do
             has_key = Item.find_by(name: "key")
+            binding.pry
             arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -62,7 +63,8 @@ module Story
             when "Check the drawer by the corner"
                 if !has_key
                     Printing.printing("You found a key to the kitchen!")
-                    Item.create(name: "key", attr_to_change: "")
+                    key = Item.create(name: "key", attr_to_change: "", description: "")
+                    HeroItem.create(hero_id: Hero.find_by(name: name).id, item_id: key.id)
                 else
                     Printing.printing("There's nothing more for you here!")
                 end

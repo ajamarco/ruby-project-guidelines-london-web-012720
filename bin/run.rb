@@ -3,15 +3,15 @@ require_relative '../config/environment'
 
 
 
-# NewGame.welcome
+NewGame.welcome
 
-# name = NewGame.pick_name
+name = NewGame.pick_name
 
-# name = NewGame.welcome_user(name)
+name = NewGame.welcome_user(name)
 
-# char = NewGame.pick_class(name)
+char = NewGame.pick_class(name)
 
-Story.scene02("Alex")
+Story.scene01(name)
 
 
 
