@@ -2,4 +2,13 @@ require_relative '../config/environment'
 
 
 
-puts "HELLO WORLD"
+
+NewGame.welcome
+
+name = NewGame.pick_name
+
+name = NewGame.welcome_user(name)
+
+char = NewGame.pick_class(name)
+
+
