@@ -1,12 +1,12 @@
 module Story
-    def self.scene01
+    def self.scene01(name)
         door = Sound.new("./sounds/door.wav")
         door.play
         Printing.printing("You enter a house on Road 7. You don't know what is waiting for you, but there's nothing you can do right now, since your car is broken and your partner broke up with you...")
         
         Printing.printing("As you walk in, there's whisper on the corner...")
         
-        Printing.printing_dialog("Hey, #{Hero.find(1).name}... It's you, right? I wouldn't forget about your face so easily",0.04)
+        Printing.printing_dialog("Hey, #{name}... It's you, right? I wouldn't forget about your face so easily",0.04)
 
         arr_to_selection = ["Yes...", "This is none of your business", "Hey! Long time no see!"]
         option = Selection.selection(arr_to_selection)

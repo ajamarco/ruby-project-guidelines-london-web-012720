@@ -11,4 +11,5 @@ name = NewGame.welcome_user(name)
 
 char = NewGame.pick_class(name)
 
+Story.scene01(name)
 
