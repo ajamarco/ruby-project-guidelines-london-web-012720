@@ -4,7 +4,7 @@ module NewGame
     
 
     def self.welcome()
-        
+        system 'clear'
         puts "
 
 
@@ -56,11 +56,22 @@ module NewGame
             
                                                                                 Choose a class:", c)
         if classification == "Warrior"
-            hero = Hero.create(name: n, hp: 100, mp: 100, profession_id: 1)
+            puts "Offensive character with high base health + damage"
+            ans = @prompt.select("Choose Warrior?", ["yes", "no"])
+            if ans == "yes"
+                hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
+             else
+                self.pick_class(n)
+             end
         else
-            hero = Hero.create(name: n, hp: 100, mp: 100, profession_id: 2)
+            puts "Magical character with high mana levels"
+            ans = @prompt.select("Choose Mage?", ["yes", "no"])
+            if ans == "yes"
+            hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)
+            else
+                self.pick_class(n)
+            end
         end
-
         hero
     end
 end

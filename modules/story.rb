@@ -62,13 +62,15 @@ module Story
             when "Check the drawer by the corner"
                 if !has_key
                     Printing.printing("You found a key to the kitchen!")
-                    Item.create(name: "key", attr_to_change: "", amount: 1) #TODO
+                    Item.create(name: "key", attr_to_change: "")
                 else
                     Printing.printing("There's nothing more for you here!")
                 end
                 
             when "Open inventory"
-                #TODO
+                Inventory.open_inventory
+                item = Inventory.select_item
+                item = Inventory.use_item?(item)
             end
 
         end

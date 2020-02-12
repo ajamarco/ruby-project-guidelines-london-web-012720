@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200211134643) do
+ActiveRecord::Schema.define(version: 20200212140008) do
 
   create_table "char_moves", force: :cascade do |t|
     t.integer "move_id"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20200211134643) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string  "name"
-    t.string  "attr_to_change"
-    t.integer "amount"
+    t.string "name"
+    t.string "attr_to_change"
+    t.string "description"
   end
 
   create_table "monsters", force: :cascade do |t|
