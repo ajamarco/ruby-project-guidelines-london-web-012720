@@ -24,21 +24,34 @@ module Story
             Printing.printing_dialog("Hey mate, how's the kids anyway? Let's talk about this later. We need to explore this place.")
             Printing.printing("The Strange man joined your party...")
         end
-        scene02
+        scene02(name)
     end 
 
-    def self.scene02
+    def self.scene02(name)
         puts "\n\n"
         Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
         control = 0
+        sitted_on_couch = false
         while control == 0 do
             has_key = Item.find_by(name: "key")
-            arr_to_selection = ["Sit in the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
+            arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
             case option
-            when arr_to_selection[0]
-            when arr_to_selection[1]
+            when "Sit on the couch"
+                if !sitted_on_couch
+                    Printing.printing("You sit on the couch and feel something weird...")
+                    Printing.printing_dialog("A spider just bit your ass. You've lost 3 health points.")
+                    
+                    hero = Hero.find_by(name: name)
+                    hero.hp -= 3
+                    hero.save
+                    GameOver.check_game_over(hero)
+                    sitted_on_couch = true
+                else
+                    Printing.printing("You sit in the couch briefly, because you are afraid of getting Coronavirus from a spider...")
+                end
+            when "Open the door to the kitchen"
                 if has_key
                     Printing.printing("You could open the door and storm into the kitchen")
                     control = 1
@@ -46,16 +59,16 @@ module Story
                 else
                     Printing.printing("The door is locked ")
                 end
-            when arr_to_selection[2]
+            when "Check the drawer by the corner"
                 if !has_key
                     Printing.printing("You found a key to the kitchen!")
-                    Item.create(name: "key", attr_to_change: "", amount: 1)
+                    Item.create(name: "key", attr_to_change: "", amount: 1) #TODO
                 else
                     Printing.printing("There's nothing more for you here!")
                 end
                 
-            when arr_to_selection[3]
-                Inventory.open_inventory
+            when "Open inventory"
+                #TODO
             end
 
         end
@@ -63,6 +76,27 @@ module Story
     end
 
     def self.scene03
-        Printing.printing("\n\n\n\n scene 03")
+        Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
+
+        control = 0
+        
+        while control == 0 do
+            arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
+            option = Selection.selection(arr_to_selection)
+
+            case option
+            when "Check inside the oven"
+                Printing.printing("You've checked inside the oven...")
+            when "Go upstairs"
+                Printing.printing("You cannot go upstairs yet.")
+            when "Talk to the stranger"
+                Printing.printing("bla bla bla")
+            when "Open cabinet" 
+                Printing.printing("FIGHT!")
+            when "Open inventory"
+                Printing.printing("Inventory")
+                #TODO
+            end
+        end
     end
 end
