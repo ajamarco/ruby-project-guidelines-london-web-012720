@@ -6,6 +6,7 @@ module Inventory
         Printing.printing("Inventory", 0.0001)
         table = TTY::Table.new [['Item', 'Owner']]
         items = HeroItem.all
+        pp items
         items.map{|i|
         [i.item.name, i.hero.name]
         }.each{|i| table << i}
@@ -37,6 +38,8 @@ module Inventory
         if res == "Yes"
             type = hero_item.item.attr_to_change
             if type == "hp"
+                pp hero_item.hero
+                pp hero_item.hero.hp
                 if hero_item.hero.hp < 95
                 hero_item.hero.hp += 5
                 puts "hp recovered #{hero_item.hero.hp}/100"
@@ -47,7 +50,7 @@ module Inventory
                     puts "hp is already max"
                     return
                 end
-            else
+            elsif type == "mp"
                 if hero_item.hero.mp < 96
                 hero_item.hero.mp += 5
                 puts "mp recovered #{hero_item.hero.mp}/100"
@@ -58,6 +61,9 @@ module Inventory
                     puts "mp is already max"
                     return
                 end
+            else
+                puts "You nibbled the key, nothing happened"
+                return
             end
             HeroItem.delete(hero_item.id)
         else

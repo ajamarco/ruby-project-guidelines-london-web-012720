@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20200212140008) do
 
   create_table "moves", force: :cascade do |t|
     t.string  "name"
-    t.string  "mp_damage"
+    t.integer "mp_damage"
     t.integer "hp_damage"
     t.integer "cost"
   end

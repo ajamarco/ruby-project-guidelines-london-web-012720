@@ -34,7 +34,6 @@ module Story
         sitted_on_couch = false
         while control == 0 do
             has_key = Item.find_by(name: "key")
-            binding.pry
             arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -43,7 +42,6 @@ module Story
                 if !sitted_on_couch
                     Printing.printing("You sit on the couch and feel something weird...")
                     Printing.printing_dialog("A spider just bit your ass. You've lost 3 health points.")
-                    
                     hero = Hero.find_by(name: name)
                     hero.hp -= 3
                     hero.save
