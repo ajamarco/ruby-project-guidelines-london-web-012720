@@ -32,6 +32,7 @@ module Story
         Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
         control = 0
         sitted_on_couch = false
+
         while control == 0 do
             has_key = Item.find_by(name: "key")
             arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
@@ -83,10 +84,8 @@ module Story
         has_flashlight = false 
         has_fighted = false
 
-
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
-        
         while control == 0 do
             arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
             option = Selection.selection(arr_to_selection)
@@ -97,8 +96,14 @@ module Story
                     Printing.printing("There's just more dust... And a meat that has been cooked for a couple of days now...")
                     eat = Selection.yer_or_no('Do you want to eat that?')
                     if eat
+                        
                         Printing.printing("You feel stronger than before!")
+                        mp_rec = Item.find_by(name: "MP recovery")
+                        new_item = HeroItem.create(hero_id: Hero.first.id, item_id: mp_rec.id)
+                        Inventory.check_use_item_response("Yes", new_item)
+                        
                         has_eated = true
+                        
                     end
                 else
                     Printing.printing("You already ate an old piece of meat. What else do you want?")
@@ -111,8 +116,19 @@ module Story
                     Printing.printing("With your flashlight you're not afraid anymore and you go to the upper level...")
                     scene04
                 end
+
             when "Talk to the stranger"
-                Printing.printing("bla bla bla")
+                Printing.printing_dialog("Do you want to ask me anything?")
+                arr_to_selection_2 = ["What's your name?", "How did you come to a place like this?", "Do you know any other information?"]
+                chat = Selection.selection(arr_to_selection_2)
+                case chat
+                when arr_to_selection_2[0]
+                    Printing.printing_dialog("It has been such long years that I have forget my own name. For some reason I remembered yours, but I don't know why...")
+                when arr_to_selection_2[1]
+                    Printing.printing_dialog("I was a software engineer studuent at Flatiron. I went crazy in the middle of a class that I lost my mind and came up to find this place. Can't remember much else...")
+                when arr_to_selection_2[2]
+                    Printing.printing_dialog("I know some tricks, such as your real name:   #{ENV['USER']}")
+                end
             when "Open cabinet" 
                 if !has_fighted
                     Fight.fight_intro(Monster.first)
@@ -127,16 +143,16 @@ module Story
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
                 end                
             when "Open inventory"
-                binding.pry
                 Inventory.open_inventory
                 item = Inventory.select_item
                 Inventory.use_item?(item)
-                #TODO check the inventory with empty database and from beginning of game
+                
             end
         end
     end
 
     def self.scene04
-        Printing.printing("\n\n\n Scene 04")
+        Printing.printing("\n\n\n You've arrived in the toilet. Its smells pretty ok for a place like this...")
+
     end
 end

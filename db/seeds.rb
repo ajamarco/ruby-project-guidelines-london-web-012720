@@ -8,6 +8,3 @@ Profession.create(name: "Mage", base_dmg: 4)
 Monster.create(name: "Bat", hp: 100, mp: 0)
 Monster.create(name: "Buggyman", hp: 150, mp: 5)
 Monster.create(name: "Caveman", hp: 200, mp: 0)
-
-
-

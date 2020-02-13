@@ -60,7 +60,7 @@ module Inventory
                     return
                 end
             else
-                puts "You nibbled the key, nothing happened"
+                puts "Nothing happened" 
                 return
             end
             HeroItem.delete(hero_item.id)
