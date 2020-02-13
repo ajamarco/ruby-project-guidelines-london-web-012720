@@ -1,4 +1,5 @@
 module Story
+    @control = 0
     def self.scene01(name)
         door = Sound.new("./sounds/door.wav")
         door.play
@@ -6,7 +7,7 @@ module Story
         
         Printing.printing("As you walk in, there's whisper on the corner...")
         
-        Printing.printing_dialog("Hey, #{name}... It's you, right? I wouldn't forget about your face so easily",0.04)
+        Printing.printing_dialog("Hey, #{name}... It's you, right? I wouldn't forget about your face so easily")
 
         arr_to_selection = ["Yes...", "This is none of your business", "Hey! Long time no see!"]
         option = Selection.selection(arr_to_selection)
@@ -30,10 +31,10 @@ module Story
     def self.scene02(name)
         puts "\n\n"
         Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
-        control = 0
+        
         sitted_on_couch = false
 
-        while control == 0 do
+        while @control == 0 do
             has_key = Item.find_by(name: "key")
             arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
             option = Selection.selection(arr_to_selection)
@@ -79,14 +80,14 @@ module Story
     end
 
     def self.scene03
-        control = 0
+        
         has_eated = false
         has_flashlight = false 
         has_fighted = false
 
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
-        while control == 0 do
+        while @control == 0 do
             arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -109,7 +110,6 @@ module Story
                     Printing.printing("You already ate an old piece of meat. What else do you want?")
                 end
             when "Go upstairs"
-                binding.pry
                 if !has_flashlight
                     Printing.printing("It seems to dark to go upstairs...")
                 else
@@ -152,7 +152,48 @@ module Story
     end
 
     def self.scene04
+        
+
         Printing.printing("\n\n\n You've arrived in the toilet. Its smells pretty ok for a place like this...")
+        Printing.printing("As soon as you enter, something jump right in front of you!!")
+        Fight.fight_intro(Monster.second)
+        Fight.battle_options(Hero.first, Monster.second)
+
+        Printing.printing("After the battle you are ready to explore the room")
+        while @control == 0 
+            arr_to_selection = ["Check Yourself in the mirror", "Go to the bedroom", "Open inventory"]
+            option = Selection.selection(arr_to_selection)
+
+            case option
+            when "Check Yourself in the mirror"
+                Printing.printing("You look awesome!")
+
+            when "Go to the bedroom"
+                scene05    
+                
+            when "Open inventory"
+                Inventory.open_inventory
+                item = Inventory.select_item
+                Inventory.use_item?(item)
+            end
+        end
+    end
+
+    def self.scene05
+        
+        Printing.printing("\n\n\n As soon as you enter you decided to check under the bed and you finally find...")
+        Fight.fight_intro(Monster.third)
+        Fight.battle_options(Hero.first, Monster.third)
+
+        
+        while @control == 0 
+            Printing.printing("\n\n\n The stranger says to you:")
+            Printing.printing_dialog("You killed that monster! I guess I own you this.")
+            Printing.printing_dialog("But if you think this is the end, well, you gotta another thing coming... ")
+            Printing.printing("\n\n\n TO BE CONTINUED...")
+            sleep 3
+            @control = 1
+        end
 
     end
 end
