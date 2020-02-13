@@ -104,7 +104,7 @@ module NewGame
 
     def self.create_monsters
         bat = Monster.create(name: "Bat", hp: 100, mp: 0)
-        buggyman = Monster.create(name: "Buggyman", hp: 150, mp: 5)
+        buggyman = Monster.create(name: "Boogeyman", hp: 150, mp: 5)
         caveman = Monster.create(name: "Caveman", hp: 200, mp: 0)
 
         CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: bat.id)

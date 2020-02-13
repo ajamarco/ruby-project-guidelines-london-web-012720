@@ -139,7 +139,6 @@ module Story
                     Printing.printing("The dead monster drop a flashlight!")
                     has_flashlight = true
                     has_fighted = true
-                    return
                 else
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
                 end                

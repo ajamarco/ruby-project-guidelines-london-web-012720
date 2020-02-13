@@ -1,8 +1,9 @@
 module Fight
 
     @prompt = TTY::Prompt.new
-
+    
     def self.fight_intro(mon)
+        binding.pry
         puts "                                                                       ======================================"
         puts "                                                                       You have encountered a #{mon.name}!!!"
         puts "                                                                       ======================================"
