@@ -190,7 +190,7 @@ module Story
             Printing.printing("\n\n\n The stranger says to you:")
             Printing.printing_dialog("You killed that monster! I guess I own you this.")
             Printing.printing_dialog("But if you think this is the end, well, you gotta another thing coming... ")
-            Printing.printing("\n\n\n TO BE CONTINUED...")
+            Printing.printing("\n\n\n TO BE CONTINUED...", 0.05)
             sleep 3
             @control = 1
         end
