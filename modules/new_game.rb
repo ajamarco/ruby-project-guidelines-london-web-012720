@@ -8,8 +8,7 @@ module NewGame
         HeroItem.destroy_all
         Item.destroy_all
         Monster.destroy_all
-
-        create_monsters
+        self.create_monsters
 
         system 'clear'
         puts "
@@ -46,7 +45,7 @@ module NewGame
     end
 
     def self.welcome_user(n)
-        puts TTY::Box.frame "Welcome #{n}!", padding: 3, width: 100, top: 25, left: 40, align: :center, style: {
+        puts TTY::Box.frame "Welcome #{n}!", padding: 1, width: 60, top: 25, left: 60, align: :center, style: {
             fg: :black,
             bg: :white,
             border: {
@@ -63,7 +62,9 @@ module NewGame
             
                                                                                 Choose a class:", c)
         if classification == "Warrior"
-            puts "Offensive character with high base health"
+            puts "                                                                       ========================================="
+            puts "                                                                       Offensive character with high base health".green
+            puts "                                                                       ========================================="
             ans = @prompt.select("Choose Warrior?", ["yes", "no"])
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
@@ -80,7 +81,9 @@ module NewGame
                 self.pick_class(n)
              end
         else
-            puts "Magical character with high mana levels"
+            puts "                                                                       ======================================="
+            puts "                                                                       Magical character with high mana levels".green
+            puts "                                                                       ======================================="
             ans = @prompt.select("Choose Mage?", ["yes", "no"])
             if ans == "yes"
             hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)

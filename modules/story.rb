@@ -47,7 +47,7 @@ module Story
                     hero = Hero.find_by(name: name)
                     hero.hp -= 3
                     hero.save
-                    GameOver.check_game_over(hero)
+                    GameOver.check_game_over(hero, Monster.find_by(name: 'Bat'))
                     sitted_on_couch = true
                 else
                     Printing.printing("You sit in the couch briefly, because you are afraid of getting Coronavirus from a spider...")
@@ -139,6 +139,7 @@ module Story
                     Printing.printing("The dead monster drop a flashlight!")
                     has_flashlight = true
                     has_fighted = true
+                    return
                 else
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
                 end                
