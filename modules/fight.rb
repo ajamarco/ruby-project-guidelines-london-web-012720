@@ -20,15 +20,13 @@ module Fight
             move = Move.find_by(name: move)
             self.attack_calc(hero, mon, move)
             end
-            if GameOver.check_game_over(hero) || GameOver.check_game_over(mon)
-                GameOver.check_game_over(hero) ? GameOver.game_over_msg(hero) : GameOver.game_over_msg(mon)
+            if GameOver.check_game_over(hero, mon)
                 return
             end
             move = mon.moves.sample
             self.enemy_attack(mon, hero, move)
             self.apply_dmg(hero, move.hp_damage)
-            if GameOver.check_game_over(hero) || GameOver.check_game_over(mon)
-                GameOver.check_game_over(hero) ? GameOver.game_over_msg(hero) : GameOver.game_over_msg(mon)
+            if GameOver.check_game_over(hero, mon)
                 return
             end
             self.battle_options(hero, mon)

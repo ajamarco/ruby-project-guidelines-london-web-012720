@@ -6,7 +6,6 @@ module Inventory
         Printing.printing("Inventory", 0.0001)
         table = TTY::Table.new [['Item', 'Owner']]
         items = HeroItem.all
-        pp items
         items.map{|i|
         [i.item.name, i.hero.name]
         }.each{|i| table << i}

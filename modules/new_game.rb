@@ -8,8 +8,7 @@ module NewGame
         HeroItem.destroy_all
         Item.destroy_all
         Monster.destroy_all
-
-        create_monsters
+        self.create_monsters
 
         system 'clear'
         puts "
