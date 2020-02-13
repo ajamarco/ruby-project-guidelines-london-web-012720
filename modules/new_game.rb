@@ -7,8 +7,6 @@ module NewGame
         Hero.destroy_all
         HeroItem.destroy_all
         Item.destroy_all
-        Item.create(name: "Potion", attr_to_change: "hp", description: "A magical potion that recovers 5hp")
-        Item.create(name: "MP recovery", attr_to_change: "mp", description: "A magical potion that recovers 5mp")
         system 'clear'
         puts "
 
@@ -66,8 +64,17 @@ module NewGame
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
                 hero2 = Hero.create(name: "Alex", hp: 70, mp: 100, profession_id: 2) 
-                HeroItem.create(hero_id: hero.id, item_id: 1)
-                HeroItem.create(hero_id: hero2.id, item_id: 2)
+                item1 = Item.create(name: "Potion", attr_to_change: "hp", description: "A magical potion that recovers 5hp")
+                item2 = Item.create(name: "MP recovery", attr_to_change: "mp", description: "A magical potion that recovers 5mp")
+                HeroItem.create(hero_id: hero.id, item_id: item1.id)
+                HeroItem.create(hero_id: hero2.id, item_id: item2.id)
+                CharMove.create(move_id: 1, moveable_type: "Hero", moveable_id: hero.id)
+                CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero.id)
+                CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero2.id)
+                CharMove.create(move_id: 3, moveable_type: "Hero", moveable_id: hero2.id)
+                CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 1)
+                CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 2)
+                CharMove.create(move_id: 3, moveable_type: "Monster", moveable_id: 3)
              else
                 self.pick_class(n)
              end
@@ -77,8 +84,17 @@ module NewGame
             if ans == "yes"
             hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)
             hero2 = Hero.create(name: "Ben", hp: 100, mp: 70, profession_id: 1) 
-            HeroItem.create(hero_id: hero.id, item_id: 2)
-            HeroItem.create(hero_id: hero2.id, item_id: 1)
+            item1 = Item.create(name: "Potion", attr_to_change: "hp", description: "A magical potion that recovers 5hp")
+            item2 = Item.create(name: "MP recovery", attr_to_change: "mp", description: "A magical potion that recovers 5mp")
+            HeroItem.create(hero_id: hero.id, item_id: item1.id)
+            HeroItem.create(hero_id: hero2.id, item_id: item2.id)
+            CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero.id)
+            CharMove.create(move_id: 1, moveable_type: "Hero", moveable_id: hero.id)
+            CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero2.id)
+            CharMove.create(move_id: 3, moveable_type: "Hero", moveable_id: hero2.id)
+            CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 1)
+            CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 2)
+            CharMove.create(move_id: 3, moveable_type: "Monster", moveable_id: 3)
             else
                 self.pick_class(n)
             end

@@ -4,7 +4,7 @@ require 'tty-box'
 require 'colorize'
 require 'ruby2d'
 require 'tty-table'
-require 'catpix'
+# require 'catpix'
 Bundler.require
 require_all 'app'
 require_all 'modules'
