@@ -1,5 +1,10 @@
 module Story
     @control = 0
+
+    def self.change_control
+        @control = 1
+    end
+
     def self.scene01(name)
         door = Sound.new("./sounds/door.wav")
         door.play
@@ -136,7 +141,7 @@ module Story
                     #TODO remove add flashlight. just add it after battle
                     Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
                     HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
-                    Printing.printing("The dead monster drop a flashlight!")
+                    Printing.printing("The dead monster drop a flashlight!") if @control == 0
                     has_flashlight = true
                     has_fighted = true
                 else
@@ -192,7 +197,7 @@ module Story
             Printing.printing_dialog("But if you think this is the end, well, you gotta another thing coming... ")
             Printing.printing("\n\n\n TO BE CONTINUED...", 0.05)
             sleep 3
-            @control = 1
+            change_control
         end
 
     end

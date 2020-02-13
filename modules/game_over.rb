@@ -14,16 +14,23 @@ module GameOver
 
     def self.check_game_over(hero, mon)
         if GameOver.check_char_status(hero) || GameOver.check_char_status(mon)
-            GameOver.check_char_status(hero) ? GameOver.game_finished : GameOver.battle_won(mon)
+            GameOver.check_char_status(hero) ? GameOver.game_finished(hero) : GameOver.battle_won(mon)
             true
         end
     end
 
-    def self.game_finished
+    def self.game_finished(char)
         puts "                                                                       ==========================================="
         puts "                                                                       #{char.name} is dead, you suck at this game".red
         puts "                                                                       ==========================================="
-        @prompt.select('Game Over.', ['Start Again'])
-        Game.game
+        option = @prompt.select('Game Over.', ['Start Again', 'END OF THE WORLD'])
+        case option
+        when 'Start Again'
+            Game.game
+        when 'END OF THE WORLD'
+            Printing.printing("\n\n\n\nHAHAHHAHAHAAHAHAHA")
+            Story.change_control
+        end
+        
     end
 end

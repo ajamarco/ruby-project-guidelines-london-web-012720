@@ -66,15 +66,15 @@ module Fight
         char.save
         if char.hp <= 0
             
-            puts "#{char.name} - 0/100".red
+            puts "#{char.name} - 0".red
             puts "===================="
             return
         end
         if char.class == Hero
-        puts "#{char.name} - #{char.hp}/100".red
+        puts "#{char.name} - #{char.hp} hp remaining".red
         puts "============================="
         else
-        puts "#{char.name} - #{char.hp}/100".green
+        puts "#{char.name} - #{char.hp} hp remaining".green
         puts "============================="
         end
     end
