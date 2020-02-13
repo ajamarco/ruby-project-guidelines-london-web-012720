@@ -80,6 +80,7 @@ module NewGame
             HeroItem.create(hero_id: hero.id, item_id: 2)
             HeroItem.create(hero_id: hero2.id, item_id: 1)
             else
+            
                 self.pick_class(n)
             end
         end

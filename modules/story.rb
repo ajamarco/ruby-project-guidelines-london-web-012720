@@ -80,9 +80,14 @@ module Story
     end
 
     def self.scene03
+        control = 0
+        has_eated = false
+        has_flashlight = false 
+        has_fighted = false
+
+
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
-        control = 0
         
         while control == 0 do
             arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
@@ -90,17 +95,48 @@ module Story
 
             case option
             when "Check inside the oven"
-                Printing.printing("You've checked inside the oven...")
+                if !has_eated
+                    Printing.printing("There's just more dust... And a meat that has been cooked for a couple of days now...")
+                    eat = Selection.yer_or_no('Do you want to eat that?')
+                    if eat
+                        Printing.printing("You feel stronger than before!")
+                        has_eated = true
+                    end
+                else
+                    Printing.printing("You already ate an old piece of meat. What else do you want?")
+                end
             when "Go upstairs"
-                Printing.printing("You cannot go upstairs yet.")
+                binding.pry
+                if !has_flashlight
+                    Printing.printing("It seems to dark to go upstairs...")
+                else
+                    Printing.printing("With your flashlight you're not afraid anymore and you go to the upper level...")
+                    scene04
+                end
             when "Talk to the stranger"
                 Printing.printing("bla bla bla")
             when "Open cabinet" 
-                Printing.printing("FIGHT!")
+                if !has_fighted
+                    Printing.printing("FIGHT!")
+                    #TODO remove add flashlight. just add it after battle
+                    Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
+                    HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
+                    has_flashlight = true
+                    has_fighted = true
+                else
+                    Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
+                end                
             when "Open inventory"
-                Printing.printing("Inventory")
-                #TODO
+                binding.pry
+                Inventory.open_inventory
+                item = Inventory.select_item
+                Inventory.use_item?(item)
+                #TODO check the inventory with empty database and from beginning of game
             end
         end
+    end
+
+    def self.scene04
+        Printing.printing("\n\n\n Scene 04")
     end
 end
