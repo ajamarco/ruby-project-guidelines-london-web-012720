@@ -27,13 +27,15 @@ module Fight
             move = mon.moves.sample
             self.enemy_attack(mon, hero, move)
             self.apply_dmg(hero, move.hp_damage)
+            if GameOver.check_game_over(hero) || GameOver.check_game_over(mon)
+                GameOver.check_game_over(hero) ? GameOver.game_over_msg(hero) : GameOver.game_over_msg(mon)
+                return
+            end
             self.battle_options(hero, mon)
         elsif ans == "Retreat"
             puts "Don't be a pussy."
             self.battle_options(hero, mon)
         else
-            pp hero
-            pp hero.hp
             Inventory.open_inventory
             item = Inventory.select_item
             item = Inventory.use_item?(item)
@@ -71,7 +73,4 @@ module Fight
         puts "#{hero.name} took #{move.hp_damage} damage!"
     end
 
-    def self.check_fight_status
-
-    end
 end

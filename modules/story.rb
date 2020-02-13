@@ -115,10 +115,12 @@ module Story
                 Printing.printing("bla bla bla")
             when "Open cabinet" 
                 if !has_fighted
-                    Printing.printing("FIGHT!")
+                    Fight.fight_intro(Monster.first)
+                    Fight.battle_options(Hero.first, Monster.first)
                     #TODO remove add flashlight. just add it after battle
                     Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
                     HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
+                    Printing.printing("The dead monster drop a flashlight!")
                     has_flashlight = true
                     has_fighted = true
                 else

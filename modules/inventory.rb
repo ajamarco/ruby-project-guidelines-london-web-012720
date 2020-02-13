@@ -38,8 +38,6 @@ module Inventory
         if res == "Yes"
             type = hero_item.item.attr_to_change
             if type == "hp"
-                pp hero_item.hero
-                pp hero_item.hero.hp
                 if hero_item.hero.hp < 95
                 hero_item.hero.hp += 5
                 puts "hp recovered #{hero_item.hero.hp}/100"

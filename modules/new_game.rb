@@ -7,6 +7,10 @@ module NewGame
         Hero.destroy_all
         HeroItem.destroy_all
         Item.destroy_all
+        Monster.destroy_all
+
+        create_monsters
+
         system 'clear'
         puts "
 
@@ -92,14 +96,22 @@ module NewGame
             CharMove.create(move_id: 1, moveable_type: "Hero", moveable_id: hero.id)
             CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero2.id)
             CharMove.create(move_id: 3, moveable_type: "Hero", moveable_id: hero2.id)
-            CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 1)
-            CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: 2)
-            CharMove.create(move_id: 3, moveable_type: "Monster", moveable_id: 3)
+
             else
             
                 self.pick_class(n)
             end
         end
         hero
+    end
+
+    def self.create_monsters
+        bat = Monster.create(name: "Bat", hp: 100, mp: 0)
+        buggyman = Monster.create(name: "Buggyman", hp: 150, mp: 5)
+        caveman = Monster.create(name: "Caveman", hp: 200, mp: 0)
+
+        CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: bat.id)
+        CharMove.create(move_id: 2, moveable_type: "Monster", moveable_id: buggyman.id)
+        CharMove.create(move_id: 3, moveable_type: "Monster", moveable_id: caveman.id)
     end
 end
