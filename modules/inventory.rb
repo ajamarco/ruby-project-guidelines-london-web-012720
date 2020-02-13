@@ -26,7 +26,9 @@ module Inventory
         item_owner = Hero.find_by(name: item[1])
         item = Item.find_by(name: item[0]) 
         hero_item = HeroItem.find_by(hero_id: item_owner.id, item_id: item.id)
-        puts "Description: #{hero_item.item.description}"
+        puts "============================================"
+        puts "  Description: #{hero_item.item.description}".green
+        puts "============================================"
         answer = @prompt.select("Use item?", ['Yes', 'Exit'])
         self.check_use_item_response(answer, hero_item)
     end
@@ -39,27 +41,41 @@ module Inventory
             if type == "hp"
                 if hero_item.hero.hp < 95
                 hero_item.hero.hp += 5
-                puts "hp recovered #{hero_item.hero.hp}/100"
+                puts "====================================="
+                puts "hp recovered #{hero_item.hero.hp}/100".green
+                puts "====================================="
                 elsif hero_item.hero.hp < 100
                     hero_item.hero.hp = 100
-                    puts "hp has reached maximum"
+                    puts "======================"
+                    puts "hp has reached maximum".red
+                    puts "======================"
                 else
-                    puts "hp is already max"
+                    puts "================="
+                    puts "hp is already max".red
+                    puts "================="
                     return
                 end
             elsif type == "mp"
                 if hero_item.hero.mp < 96
                 hero_item.hero.mp += 5
-                puts "mp recovered #{hero_item.hero.mp}/100"
+                puts "====================================="
+                puts "mp recovered #{hero_item.hero.mp}/100".green
+                puts "====================================="
                 elsif hero_item.hero.mp < 100
                     hero_item.hero.mp = 100
-                    puts "mp has reached maximum"
+                    puts "======================"
+                    puts "mp has reached maximum".red
+                    puts "======================"
                 else
-                    puts "mp is already max"
+                    puts "================="
+                    puts "mp is already max".red
+                    puts "================="
                     return
                 end
             else
-                puts "You nibbled the key, nothing happened"
+                puts "======================================"
+                puts "You nibbled the key, nothing happened.".green
+                puts "======================================"
                 return
             end
             HeroItem.delete(hero_item.id)
