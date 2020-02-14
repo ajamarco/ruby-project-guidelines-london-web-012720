@@ -7,9 +7,10 @@ module GameOver
     end
 
     def self.battle_won(mon)
-        puts "                                                                       ================================================"
-        puts "                                                                       #{mon.name} is dead, you live to see another day".green
-        puts "                                                                       ================================================"
+        sleep 1
+        puts "================================================"
+        puts "#{mon.name} is dead, you live to see another day".green
+        puts "================================================"
     end
 
     def self.check_game_over(hero, mon)
@@ -20,17 +21,18 @@ module GameOver
     end
 
     def self.game_finished(char)
-        puts "                                                                       ==========================================="
-        puts "                                                                       #{char.name} is dead, you suck at this game".red
-        puts "                                                                       ==========================================="
-        option = @prompt.select('Game Over.', ['Start Again', 'END OF THE WORLD'])
+        sleep 1
+        puts "==========================================="
+        puts "#{char.name} is dead, you suck at this game".red
+        puts "==========================================="
+        option = @prompt.select('Game Over.', ['Start Again', 'Exit Game'])
         case option
         when 'Start Again'
             Game.game
-        when 'END OF THE WORLD'
+        when 'Exit Game'
             Printing.printing("\n\n\n\nHAHAHHAHAHAAHAHAHA")
             Story.change_control
         end
         
-    end
+
 end
