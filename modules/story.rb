@@ -9,11 +9,11 @@ module Story
         GameSound.play_door
         Printing.printing("You enter a house on Road 7. You don't know what is waiting for you, but there's nothing you can do right now, since your car is broken and your partner broke up with you...")
         sleep 1
-        Printing.printing("As you walk in, there's whisper on the corner...")
+        Printing.printing("As you walk in, there's a whisper on the corner...")
         sleep 1
         Printing.printing_dialog_g("Hey, #{name}... It's you, right? I wouldn't forget about your face so easily")
         sleep 1
-        arr_to_selection = ["Yes...", "This is none of your business", "Hey! Long time no see!"]
+        arr_to_selection = ["Yes...", "That's none of your business", "Hey! Long time no see!"]
         option = Selection.selection(arr_to_selection)
         case option
         when arr_to_selection[0]
@@ -23,7 +23,7 @@ module Story
             Printing.printing("The Strange man joined your party...")
         when arr_to_selection[1]
             puts "\n"
-            Printing.printing_dialog_r("I don't know why you are so rude. Have you broke up with your partner? Come on, let's go explore this place!")
+            Printing.printing_dialog_r("I don't know why you are so rude. Have you broke up with your partner or something? Come on, let's go explore this place!")
             sleep 1
             Printing.printing("The Strange man joined your party...")
             puts "\n"
@@ -54,10 +54,12 @@ module Story
             case option
             when "Sit on the couch"
                 if !sitted_on_couch
+                    puts "\n"
                     Printing.printing("You sit on the couch and feel something weird...")
                     sleep 0.5
                     puts "\n"
                     Printing.printing_dialog_r("A spider just bit your ass. You've lost 3 health points.")
+                    puts "\n"
                     hero = Hero.find_by(name: name)
                     hero.hp -= 3
                     hero.save
@@ -65,13 +67,13 @@ module Story
                     sitted_on_couch = true
                 else
                     puts "\n"
-                    Printing.printing("You sit in the couch briefly, because you are afraid of getting Coronavirus from a spider...")
+                    Printing.printing("You sit on the couch briefly, because you are afraid of getting Coronavirus from a spider...")
                     puts "\n"
                 end
             when "Open the door to the kitchen"
                 if has_key
                     puts "\n"
-                    Printing.printing("You could open the door and storm into the kitchen")
+                    Printing.printing("You open the door and storm into the kitchen")
                     puts "\n"
                     control = 1
                     scene03
@@ -111,7 +113,7 @@ module Story
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
         while @control == 0 do
-            arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
+            arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to your 'friend'", "Open cabinet", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
             case option
@@ -139,7 +141,7 @@ module Story
 
             when "Go upstairs"
                 if !has_flashlight
-                    Printing.printing("It seems to dark to go upstairs...")
+                    Printing.printing("It seems too dark to go upstairs...")
                 else
                     Printing.printing("With your flashlight you're not afraid anymore and you go to the upper level...")
                     scene04
@@ -153,7 +155,7 @@ module Story
                 when arr_to_selection_2[0]
                     Printing.printing_dialog_g("It has been such long years that I have forget my own name. For some reason I remembered yours, but I don't know why...")
                 when arr_to_selection_2[1]
-                    Printing.printing_dialog_g("I was a software engineer studuent at Flatiron. I went crazy in the middle of a class that I lost my mind and came up to find this place. Can't remember much else...")
+                    Printing.printing_dialog_g("I was a software engineer student at Flatiron. I went crazy in the middle of a lecture by lost my mind and came up to find this place. Can't remember much else...")
                 when arr_to_selection_2[2]
                     Printing.printing_dialog_g("I know some tricks, such as your real name:   #{ENV['USER']}")
                 end
@@ -168,7 +170,7 @@ module Story
                     Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
                     HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
                     sleep 1
-                    Printing.printing("The dead monster drop a flashlight!") if @control == 0
+                    Printing.printing("The dead monster dropped a flashlight!") if @control == 0
                     has_flashlight = true
                     has_fighted = true
                     GameSound.start_background
@@ -188,7 +190,7 @@ module Story
     def self.scene04
         
         sleep 1
-        Printing.printing("\n\n\n You've arrived in the toilet. Its smells pretty ok for a place like this...")
+        Printing.printing("\n\n\n You've arrived in the toilet. It smells pretty ok for a place like this...")
         sleep 1
         Printing.printing("As soon as you enter, something jump right in front of you!!")
         
@@ -206,8 +208,9 @@ module Story
 
             case option
             when "Check Yourself in the mirror"
+                puts "\n"
                 Printing.printing("You look awesome!")
-
+                puts "\n"
             when "Go to the bedroom"
                 scene05    
                 
@@ -230,9 +233,14 @@ module Story
         while @control == 0
             
             Printing.printing("\n\n\n The stranger says to you:")
-            Printing.printing_dialog_g("You killed that monster! I guess I own you this.")
-            Printing.printing_dialog_r("But if you think this is the end, well, you gotta another thing coming... ")
-            Printing.printing("\n\n\n TO BE CONTINUED...", 0.05)
+            Printing.printing_dialog_g("You killed that monster! I guess I owe you for this.")
+            puts "\n"
+            Printing.printing_dialog_g("Game Completed!!!")
+            puts "\n"
+            puts "\n"
+            Printing.printing_dialog_r("But if you think this is the end, well, you gotta another thing coming...")
+            puts "\n"
+            Printing.printing("\n\n\n Screams on road 8, ETA 2032", 0.05)
             sleep 3
             change_control
         end
