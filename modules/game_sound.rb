@@ -4,8 +4,19 @@ module GameSound
     @door = Sound.new("./sounds/door.wav")
     @intro = Sound.new("./sounds/intro.wav")
     @victory = Sound.new("./sounds/victory.wav")
+    @game_over = Music.new("./sounds/game_over.wav")
     @background.loop = true
     @fight.loop = true
+    @game_over.loop = true
+
+
+    def self.start_game_over
+        @game_over.play
+    end
+
+    def self.stop_game_over
+        @game_over.stop
+    end
 
     def self.start_background
         @background.play

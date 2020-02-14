@@ -24,6 +24,8 @@ module GameOver
     end
 
     def self.game_finished(char)
+        GameSound.fade_fight(400)
+        GameSound.start_game_over
         sleep 1
         puts "==========================================="
         puts "#{char.name} is dead, you suck at this game".red
@@ -31,9 +33,12 @@ module GameOver
         option = @prompt.select('Game Over.', ['Start Again', 'Exit Game'])
         case option
         when 'Start Again'
+            GameSound.stop_game_over
             Game.game
         when 'Exit Game'
             Printing.printing("\n\n\n\nHAHAHHAHAHAAHAHAHA")
+            GameSound.stop_game_over
+            sleep 0.5
             Story.change_control
         end
     end

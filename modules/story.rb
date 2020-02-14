@@ -6,6 +6,7 @@ module Story
     end
 
     def self.scene01(name)
+        binding.pry
         GameSound.play_door
         Printing.printing("You enter a house on Road 7. You don't know what is waiting for you, but there's nothing you can do right now, since your car is broken and your partner broke up with you...")
         sleep 1
@@ -240,7 +241,9 @@ module Story
             puts "\n"
             Printing.printing_dialog_r("But if you think this is the end, well, you gotta another thing coming...")
             puts "\n"
+            GameSound.play_intro
             Printing.printing("\n\n\n Screams on road 8, ETA 2032", 0.05)
+            
             sleep 3
             change_control
         end
