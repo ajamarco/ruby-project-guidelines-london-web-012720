@@ -1,17 +1,12 @@
 module Story
     @control = 0
-    @background = Music.new("./sounds/background.wav")
-    @fight = Music.new("./sounds/fight.wav")
-    @background.loop = true
-    @fight.loop = true
 
     def self.change_control
         @control = 1
     end
 
     def self.scene01(name)
-        door = Sound.new("./sounds/door.wav")
-        door.play
+        GameSound.play_door
         Printing.printing("You enter a house on Road 7. You don't know what is waiting for you, but there's nothing you can do right now, since your car is broken and your partner broke up with you...")
         sleep 1
         Printing.printing("As you walk in, there's whisper on the corner...")
@@ -43,7 +38,7 @@ module Story
     end 
 
     def self.scene02(name)
-        @background.play
+        GameSound.start_background
         puts "\n\n"
         Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
         puts "\n"
@@ -116,7 +111,6 @@ module Story
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
         while @control == 0 do
-            @background.resume
             arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -166,20 +160,18 @@ module Story
 
             when "Open cabinet" 
                 if !has_fighted
-                    @background.fadeout(1000)
-                    sleep 2
-                    @fight.play
+                    sleep 1
+                    GameSound.fade_background(1000)
                     Fight.fight_intro(Monster.first)
                     Fight.battle_options(Hero.first, Monster.first)
-                    @fight.fadeout(500)
-                    @fight.stop
+                
                     Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
                     HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
                     sleep 1
                     Printing.printing("The dead monster drop a flashlight!") if @control == 0
                     has_flashlight = true
                     has_fighted = true
-                    @background.play
+                    GameSound.start_background
                     sleep 1
                 else
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
@@ -199,17 +191,16 @@ module Story
         Printing.printing("\n\n\n You've arrived in the toilet. Its smells pretty ok for a place like this...")
         sleep 1
         Printing.printing("As soon as you enter, something jump right in front of you!!")
-        @background.fadeout(500)
+        
         Fight.fight_intro(Monster.second)
-        @fight.play
+       
         Fight.battle_options(Hero.first, Monster.second)
-        @fight.fadeout(100)
-        @fight.stop
+        
         sleep 1
-        @background.play
+        
         Printing.printing("After the battle you are ready to explore the room")
         while @control == 0 
-            @background.resume
+            
             arr_to_selection = ["Check Yourself in the mirror", "Go to the bedroom", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -234,9 +225,10 @@ module Story
         Fight.fight_intro(Monster.third)
         Fight.battle_options(Hero.first, Monster.third)
 
+        sleep 1
         
         while @control == 0
-            @background.resume 
+            
             Printing.printing("\n\n\n The stranger says to you:")
             Printing.printing_dialog_g("You killed that monster! I guess I own you this.")
             Printing.printing_dialog_r("But if you think this is the end, well, you gotta another thing coming... ")

@@ -3,8 +3,9 @@ module Fight
     @prompt = TTY::Prompt.new
     
     def self.fight_intro(mon)
-        sleep 1
+        sleep 1.5
         puts "======================================"
+        GameSound.start_fight
         puts "You have encountered a #{mon.name}!!!"
         puts "======================================"
         sleep 1
