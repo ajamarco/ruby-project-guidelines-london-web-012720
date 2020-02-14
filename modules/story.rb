@@ -147,7 +147,7 @@ module Story
                     scene04
                 end
 
-            when "Talk to the stranger"
+            when "Talk to your 'friend'"
                 Printing.printing_dialog_g("Do you want to ask me anything?")
                 arr_to_selection_2 = ["What's your name?", "How did you come to a place like this?", "Do you know any other information?"]
                 chat = Selection.selection(arr_to_selection_2)
