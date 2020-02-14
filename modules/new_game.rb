@@ -63,7 +63,7 @@ module NewGame
             ans = @prompt.select("Are you sure?", ["yes", "no"])
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
-                hero2 = Hero.create(name: "Alex", hp: 70, mp: 100, profession_id: 2) 
+                hero2 = Hero.create(name: "Stranger", hp: 70, mp: 100, profession_id: 2) 
                 create_items(hero,hero2)
                 CharMove.create(move_id: 1, moveable_type: "Hero", moveable_id: hero.id)
                 CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero.id)
@@ -82,8 +82,8 @@ module NewGame
             puts "                                                                       ======================================="
             ans = @prompt.select("Are you sure?", ["yes", "no"])
             if ans == "yes"
-            hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)
-            hero2 = Hero.create(name: "Ben", hp: 100, mp: 70, profession_id: 1) 
+            hero = Hero.create(name: n, hp: 90, mp: 100, profession_id: 2)
+            hero2 = Hero.create(name: "Stranger", hp: 100, mp: 70, profession_id: 1) 
             create_items(hero,hero2)
             CharMove.create(move_id: 2, moveable_type: "Hero", moveable_id: hero.id)
             CharMove.create(move_id: 1, moveable_type: "Hero", moveable_id: hero.id)

@@ -1,5 +1,9 @@
 module Story
     @control = 0
+    @background = Music.new("./sounds/background.wav")
+    @fight = Music.new("./sounds/fight.wav")
+    @background.loop = true
+    @fight.loop = true
 
     def self.change_control
         @control = 1
@@ -39,6 +43,7 @@ module Story
     end 
 
     def self.scene02(name)
+        @background.play
         puts "\n\n"
         Printing.printing("You and your friend are in the living room. \nThere are some things you can do in there...")
         puts "\n"
@@ -46,6 +51,7 @@ module Story
         sitted_on_couch = false
 
         while @control == 0 do
+            
             has_key = Item.find_by(name: "key")
             arr_to_selection = ["Sit on the couch", "Open the door to the kitchen", "Check the drawer by the corner", "Open inventory"]
             option = Selection.selection(arr_to_selection)
@@ -103,7 +109,6 @@ module Story
     end
 
     def self.scene03
-        
         has_eated = false
         has_flashlight = false 
         has_fighted = false
@@ -111,6 +116,7 @@ module Story
         Printing.printing("\n\n\nYou are in the kitchen. It's dirty and cold. You have to decide what to do...")
 
         while @control == 0 do
+            @background.resume
             arr_to_selection = ["Check inside the oven", "Go upstairs", "Talk to the stranger", "Open cabinet", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -136,6 +142,7 @@ module Story
                     puts "\n"
                     Printing.printing("You already ate an old piece of meat. What else do you want?")
                 end
+
             when "Go upstairs"
                 if !has_flashlight
                     Printing.printing("It seems to dark to go upstairs...")
@@ -156,16 +163,23 @@ module Story
                 when arr_to_selection_2[2]
                     Printing.printing_dialog_g("I know some tricks, such as your real name:   #{ENV['USER']}")
                 end
+
             when "Open cabinet" 
                 if !has_fighted
+                    @background.fadeout(1000)
+                    sleep 2
+                    @fight.play
                     Fight.fight_intro(Monster.first)
                     Fight.battle_options(Hero.first, Monster.first)
-                    #TODO remove add flashlight. just add it after battle
+                    @fight.fadeout(500)
+                    @fight.stop
                     Item.create(name: "Flashlight", attr_to_change: "", description: "Well, it's a flashlight... So, it flashes a light...")
                     HeroItem.create(hero_id: Hero.first.id, item_id: Item.last.id)
+                    sleep 1
                     Printing.printing("The dead monster drop a flashlight!") if @control == 0
                     has_flashlight = true
                     has_fighted = true
+                    @background.play
                     sleep 1
                 else
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
@@ -185,11 +199,17 @@ module Story
         Printing.printing("\n\n\n You've arrived in the toilet. Its smells pretty ok for a place like this...")
         sleep 1
         Printing.printing("As soon as you enter, something jump right in front of you!!")
+        @background.fadeout(500)
         Fight.fight_intro(Monster.second)
+        @fight.play
         Fight.battle_options(Hero.first, Monster.second)
+        @fight.fadeout(100)
+        @fight.stop
         sleep 1
+        @background.play
         Printing.printing("After the battle you are ready to explore the room")
         while @control == 0 
+            @background.resume
             arr_to_selection = ["Check Yourself in the mirror", "Go to the bedroom", "Open inventory"]
             option = Selection.selection(arr_to_selection)
 
@@ -215,7 +235,8 @@ module Story
         Fight.battle_options(Hero.first, Monster.third)
 
         
-        while @control == 0 
+        while @control == 0
+            @background.resume 
             Printing.printing("\n\n\n The stranger says to you:")
             Printing.printing_dialog_g("You killed that monster! I guess I own you this.")
             Printing.printing_dialog_r("But if you think this is the end, well, you gotta another thing coming... ")
