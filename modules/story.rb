@@ -6,7 +6,6 @@ module Story
     end
 
     def self.scene01(name)
-        binding.pry
         GameSound.play_door
         Printing.printing("You enter a house on Road 7. You don't know what is waiting for you, but there's nothing you can do right now, since your car is broken and your partner broke up with you...")
         sleep 1
