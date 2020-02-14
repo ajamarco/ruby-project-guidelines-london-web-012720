@@ -3,9 +3,11 @@ module Fight
     @prompt = TTY::Prompt.new
 
     def self.fight_intro(mon)
-        puts "                                                                       ======================================"
-        puts "                                                                       You have encountered a #{mon.name}!!!"
-        puts "                                                                       ======================================"
+        sleep 1
+        puts "======================================"
+        puts "You have encountered a #{mon.name}!!!"
+        puts "======================================"
+        sleep 1
     end
 
     def self.battle_options(hero, mon)
@@ -76,13 +78,13 @@ module Fight
         puts "#{char.name} - #{char.hp}/100".green
         puts "============================="
         end
+        sleep 0.5
     end
 
     def self.enemy_attack(mon, hero, move)
         puts "============================="
         puts "#{mon.name} used #{move.name}".red
         puts "#{hero.name} took #{move.hp_damage} damage!".red
-       
     end
 
 end

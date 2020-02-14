@@ -36,23 +36,16 @@ module NewGame
                       ╚══════╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═══╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═════╝        ╚═╝  
                                                                                                                                            
         "
-  
+        sleep 0.5
     end
-
+    
     def self.pick_name
       name = @prompt.ask("                                                                                Choose a name:")
       name
     end
 
     def self.welcome_user(n)
-        puts TTY::Box.frame "Welcome #{n}!", padding: 1, width: 60, top: 25, left: 60, align: :center, style: {
-            fg: :black,
-            bg: :white,
-            border: {
-              fg: :black,
-              bg: :red
-            }
-          }
+        puts TTY::Box.frame "Welcome #{n}!", padding: 1, width: 60, top: 25, left: 60, align: :center
         n
     end
 
@@ -62,10 +55,11 @@ module NewGame
             
                                                                                 Choose a class:", c)
         if classification == "Warrior"
+            sleep 0.5
             puts "                                                                       ========================================="
             puts "                                                                       Offensive character with high base health".green
             puts "                                                                       ========================================="
-            ans = @prompt.select("Choose Warrior?", ["yes", "no"])
+            ans = @prompt.select("Are you sure?", ["yes", "no"])
             if ans == "yes"
                 hero = Hero.create(name: n, hp: 100, mp: 70, profession_id: 1) 
                 hero2 = Hero.create(name: "Alex", hp: 70, mp: 100, profession_id: 2) 
@@ -81,10 +75,11 @@ module NewGame
                 self.pick_class(n)
              end
         else
+            sleep 0.5
             puts "                                                                       ======================================="
             puts "                                                                       Magical character with high mana levels".green
             puts "                                                                       ======================================="
-            ans = @prompt.select("Choose Mage?", ["yes", "no"])
+            ans = @prompt.select("Are you sure?", ["yes", "no"])
             if ans == "yes"
             hero = Hero.create(name: n, hp: 70, mp: 100, profession_id: 2)
             hero2 = Hero.create(name: "Ben", hp: 100, mp: 70, profession_id: 1) 

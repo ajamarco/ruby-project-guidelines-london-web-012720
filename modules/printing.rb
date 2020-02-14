@@ -4,7 +4,13 @@ module Printing
         puts "\n"
     end
 
-    def self.printing_dialog(text, sleep_time = 0)
+    def self.printing_dialog_g(text, sleep_time = 0)
+        puts "\n"
+        text.each_char {|c| print c.green; sleep sleep_time}
+        puts "\n"
+    end
+
+    def self.printing_dialog_r(text, sleep_time = 0)
         puts "\n"
         text.each_char {|c| print c.red; sleep sleep_time}
         puts "\n"
