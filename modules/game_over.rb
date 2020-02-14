@@ -7,8 +7,12 @@ module GameOver
     end
 
     def self.battle_won(mon)
+        # door = Sound.new("./sounds/door.wav")
+        # door.play
+        victory = Sound.new("./sounds/victory.wav")
         sleep 1
         puts "================================================"
+        victory.play
         puts "#{mon.name} is dead, you live to see another day".green
         puts "================================================"
     end
@@ -33,6 +37,7 @@ module GameOver
             Printing.printing("\n\n\n\nHAHAHHAHAHAAHAHAHA")
             Story.change_control
         end
+    end
         
 
 end

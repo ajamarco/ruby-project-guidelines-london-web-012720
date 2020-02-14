@@ -25,7 +25,8 @@ module NewGame
 
        
         sleep 1
-        
+        intro = Sound.new("./sounds/intro.wav")
+        intro.play
         puts "
         
                       ███████╗ ██████╗██████╗ ███████╗ █████╗ ███╗   ███╗███████╗     ██████╗ ███╗   ██╗    ██████╗  ██████╗  █████╗ ██████╗     ███████╗

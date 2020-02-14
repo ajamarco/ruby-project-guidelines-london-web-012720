@@ -166,6 +166,7 @@ module Story
                     Printing.printing("The dead monster drop a flashlight!") if @control == 0
                     has_flashlight = true
                     has_fighted = true
+                    sleep 1
                 else
                     Printing.printing("There's nothing more here but the carcass of the bat you just killed. No, you can't eat that...")
                 end                
